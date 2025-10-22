@@ -28,7 +28,7 @@ architecture Behavioral of top is
     
     signal strobe : std_logic := '0';
     
-    signal led_abs : std_logic_vector(15 downto 0) := (others => '0');
+    signal led_abs : std_logic_vector(15 downto 0) := (others => '1');
 begin
 
     process(CLK100MHZ)
@@ -74,8 +74,12 @@ begin
     
     process(strobe)
     begin
-    
+        if falling_edge(strobe) then
+            led_abs <= std_logic_vector(abs(signed(out_left(23 downto 8))));
+        end if;
     end process;
+
+    LED <= led_abs;
 
     AD_MCLK <= clk_counter(2);
     DA_MCLK <= clk_counter(2);
