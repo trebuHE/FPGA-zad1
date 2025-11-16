@@ -1,12 +1,12 @@
-Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
-------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-| Date         : Wed Nov  5 10:39:11 2025
-| Host         : fpgalab214 running 64-bit major release  (build 9200)
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
+| Date         : Sun Nov 16 15:27:29 2025
+| Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
 | Device       : xc7a100t
-------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 Control Set Information
 
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |     8 |
-|    Minimum number of control sets                        |     8 |
+| Total control sets                                       |    23 |
+|    Minimum number of control sets                        |    23 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    12 |
+| Unused register locations in slices containing registers |   121 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,11 +39,11 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |     8 |
-| >= 0 to < 4        |     1 |
-| >= 4 to < 6        |     1 |
+| Total control sets |    23 |
+| >= 0 to < 4        |    16 |
+| >= 4 to < 6        |     0 |
 | >= 6 to < 8        |     0 |
-| >= 8 to < 10       |     0 |
+| >= 8 to < 10       |     1 |
 | >= 10 to < 12      |     0 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
@@ -58,29 +58,44 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              32 |            9 |
+| No           | No                    | No                     |              33 |           11 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |              47 |           11 |
+| No           | Yes                   | No                     |              15 |           15 |
+| Yes          | No                    | No                     |              47 |           13 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              53 |           10 |
+| Yes          | Yes                   | No                     |              56 |           16 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------------+--------------------------+--------------------------+------------------+----------------+
-|     Clock Signal     |       Enable Signal      |     Set/Reset Signal     | Slice Load Count | Bel Load Count |
-+----------------------+--------------------------+--------------------------+------------------+----------------+
-|  CLK100MHZ_IBUF_BUFG | DA_SDIN_i_1_n_0          |                          |                1 |              1 |
-|  CLK100MHZ_IBUF_BUFG | shift_counter[4]_i_2_n_0 | shift_counter[4]_i_1_n_0 |                1 |              5 |
-| ~strobe              |                          |                          |                5 |             16 |
-|  CLK100MHZ_IBUF_BUFG |                          |                          |                4 |             16 |
-|  CLK100MHZ_IBUF_BUFG | out_right[23]_i_1_n_0    |                          |                7 |             23 |
-|  CLK100MHZ_IBUF_BUFG | p_1_in[23]               |                          |                3 |             23 |
-|  CLK100MHZ_IBUF_BUFG | in_right[23]_i_1_n_0     | strobe_i_1_n_0           |                4 |             24 |
-|  CLK100MHZ_IBUF_BUFG | in_left[23]_i_1_n_0      | strobe_i_1_n_0           |                5 |             24 |
-+----------------------+--------------------------+--------------------------+------------------+----------------+
++----------------------+--------------------------+--------------------------+------------------+----------------+--------------+
+|     Clock Signal     |       Enable Signal      |     Set/Reset Signal     | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------------+--------------------------+--------------------------+------------------+----------------+--------------+
+|  CLK100MHZ_IBUF_BUFG | DA_SDIN_i_1_n_0          |                          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[14]_i_1_n_0          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[12]_i_1_n_0          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[10]_i_1_n_0          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[5]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[9]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[11]_i_1_n_0          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[1]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[3]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[6]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[7]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[13]_i_1_n_0          |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[4]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED0                     |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[2]_i_1_n_0           |                1 |              1 |         1.00 |
+| ~strobe_BUFG         |                          | LED[8]_i_1_n_0           |                1 |              1 |         1.00 |
+|  CLK100MHZ_IBUF_BUFG | shift_counter[7]_i_2_n_0 | shift_counter[7]_i_1_n_0 |                3 |              8 |         2.67 |
+|  CLK100MHZ_IBUF_BUFG |                          |                          |                7 |             16 |         2.29 |
+| ~strobe_BUFG         |                          |                          |                4 |             17 |         4.25 |
+|  CLK100MHZ_IBUF_BUFG | out_right[23]            |                          |                8 |             23 |         2.88 |
+|  CLK100MHZ_IBUF_BUFG | out_left[23]             |                          |                4 |             23 |         5.75 |
+|  CLK100MHZ_IBUF_BUFG | in_left                  | strobe0                  |                6 |             24 |         4.00 |
+|  CLK100MHZ_IBUF_BUFG | in_right                 | strobe0                  |                7 |             24 |         3.43 |
++----------------------+--------------------------+--------------------------+------------------+----------------+--------------+
 
 

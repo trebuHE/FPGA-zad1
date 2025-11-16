@@ -29,6 +29,7 @@ architecture Behavioral of top is
     signal strobe : std_logic := '0';
     
     signal led_abs : unsigned(15 downto 0) := (others => '0');
+    signal shift_counter : unsigned(7 downto 0) := (others => '0');
 begin
 
     process(CLK100MHZ)
@@ -39,7 +40,7 @@ begin
     end process;
     
     process(CLK100MHZ)
-    variable shift_counter : integer range 0 to 24;
+
     begin
         if rising_edge(CLK100MHZ) then
             strobe <= '0';
@@ -48,20 +49,20 @@ begin
             
             if clk_counter(10) = '0' then
                 if sclk_prev = '0' and clk_counter(4) = '1' then
-                    if shift_counter < 24 then
+                    if shift_counter > 0 and shift_counter < 25 then
                         in_left <= in_left(22 downto 0) & AD_SDOUT;
-                        shift_counter := shift_counter + 1;
                     end if;
-                elsif sclk_prev = '1' and clk_counter(4) = '0' then
+                    shift_counter <= shift_counter + 1;
+                elsif sclk_prev = '1' and clk_counter(4) = '0' and shift_counter > 1 then
                     DA_SDIN <= out_left(23);
                     out_left <= out_left(22 downto 0) & '0';
                 end if;
             elsif clk_counter(10) = '1' then
                 if sclk_prev = '0' and clk_counter(4) = '1' then
-                    if shift_counter < 24 then
+                    if shift_counter > 0 and shift_counter < 25 then
                         in_right <= in_right(22 downto 0) & AD_SDOUT;
-                        shift_counter := shift_counter + 1;
                     end if;
+                    shift_counter <= shift_counter + 1;
                 elsif sclk_prev = '1' and clk_counter(4) = '0' then
                     DA_SDIN <= out_right(23);
                     out_right <= out_right(22 downto 0) & '0';
@@ -74,11 +75,11 @@ begin
                 in_left <= (others => '0');
                 in_right <= (others => '0');
                 strobe <= '1';
-                shift_counter := 0;
+                shift_counter <= (others => '0');
             end if;
             
             if lrck_prev = '0' and clk_counter(10) = '1' then
-                shift_counter := 0;
+                shift_counter <= (others => '0');
             end if;
             
         end if;
