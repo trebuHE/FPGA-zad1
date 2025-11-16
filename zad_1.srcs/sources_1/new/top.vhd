@@ -30,6 +30,7 @@ architecture Behavioral of top is
     
     signal led_abs : unsigned(15 downto 0) := (others => '0');
     signal shift_counter : unsigned(7 downto 0) := (others => '0');
+    signal reset : std_logic := '1';
 begin
 
     process(CLK100MHZ)
@@ -49,7 +50,14 @@ begin
             
             if clk_counter(10) = '0' then
                 if sclk_prev = '0' and clk_counter(4) = '1' then
-                    if shift_counter > 0 and shift_counter < 25 then
+                    if reset = '1' then
+                        out_left <= in_left;
+                        out_right <= in_right;
+                        in_left <= (others => '0');
+                        in_right <= (others => '0');
+                        strobe <= '1';
+                        reset <= '0';
+                    elsif shift_counter > 0 and shift_counter < 25 then
                         in_left <= in_left(22 downto 0) & AD_SDOUT;
                     end if;
                     shift_counter <= shift_counter + 1;
@@ -70,11 +78,7 @@ begin
             end if;
             
             if lrck_prev = '1' and clk_counter(10) = '0' then
-                out_left <= in_left;
-                out_right <= in_right;
-                in_left <= (others => '0');
-                in_right <= (others => '0');
-                strobe <= '1';
+                reset <= '1';
                 shift_counter <= (others => '0');
             end if;
             
