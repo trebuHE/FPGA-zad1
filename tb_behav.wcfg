@@ -10,13 +10,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="20446640000fs"></ZoomStartTime>
-      <ZoomEndTime time="21172640001fs"></ZoomEndTime>
-      <Cursor1Time time="20858640000fs"></Cursor1Time>
+      <ZoomStartTime time="15.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="105.970001 us"></ZoomEndTime>
+      <Cursor1Time time="28.402515 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="130"></ValueColumnWidth>
+      <ValueColumnWidth column_width="126"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="16" />
    <wvobject fp_name="/tb/clk" type="logic">
@@ -82,5 +82,6 @@
    <wvobject fp_name="/tb/dut/led_abs" type="array">
       <obj_property name="ElementShortName">led_abs[15:0]</obj_property>
       <obj_property name="ObjectShortName">led_abs[15:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
 </wave_config>
